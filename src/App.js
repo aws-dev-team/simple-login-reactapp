@@ -1,25 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import Amplify, { API, Auth } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react-v1'
+import awsconfig from './aws-exports';
+import Webpages from './webpages';
+
+Amplify.configure(awsconfig);
+
+const myInit = { // OPTIONAL
+  /*headers: {}, // OPTIONAL
+  response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+  queryStringParameters: {  // OPTIONAL
+      name: 'param',
+  },*/
+};
+
+console.log('PRUEBA DE CONSUMO');
+
+console.log(API.get('simplereactapi', '/helloworld', myInit));
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Webpages />
     </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App)
