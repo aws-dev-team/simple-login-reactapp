@@ -1,0 +1,14 @@
+{
+  "resourceName": "storage",
+  "policyUUID": "07914961",
+  "bucketName": "simpleloginreactstorage",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

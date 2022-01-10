@@ -13,6 +13,19 @@
           "delete"
         ]
       }
+    },
+    "/processFile": {
+      "name": "/processFile",
+      "lambdaFunction": "processFileService",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
     }
   }
 }

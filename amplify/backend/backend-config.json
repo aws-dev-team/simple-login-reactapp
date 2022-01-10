@@ -32,6 +32,20 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "processFileService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "storage",
+          "attributes": [
+            "BucketName"
+          ]
+        }
+      ]
     }
   },
   "api": {
@@ -46,8 +60,23 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "processFileService",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
+    }
+  },
+  "storage": {
+    "storage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   }
 }
