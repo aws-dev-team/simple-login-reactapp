@@ -23,5 +23,30 @@
         }
       }
     }
+  },
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-simpleloginreactapp-staging-215300-authRole",
+      "UnauthRoleArn": "arn:aws:iam::297494169308:role/amplify-simpleloginreactapp-staging-215300-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::297494169308:role/amplify-simpleloginreactapp-staging-215300-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-simpleloginreactapp-staging-215300-deployment",
+      "UnauthRoleName": "amplify-simpleloginreactapp-staging-215300-unauthRole",
+      "StackName": "amplify-simpleloginreactapp-staging-215300",
+      "StackId": "arn:aws:cloudformation:us-east-1:297494169308:stack/amplify-simpleloginreactapp-staging-215300/a4f231b0-70ff-11ec-9d9d-12ff6568a011",
+      "AmplifyAppId": "dey84929uvgr1",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-simpleloginreactapp-staging-215300-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "function": {
+        "SimpleAppHelloWorldService": {
+          "deploymentBucketName": "amplify-simpleloginreactapp-staging-215300-deployment",
+          "s3Key": "amplify-builds/SimpleAppHelloWorldService-576d6e474a466e4f4134-build.zip"
+        }
+      },
+      "auth": {
+        "simpleloginreactapp29ee8b55": {}
+      }
+    }
   }
 }
