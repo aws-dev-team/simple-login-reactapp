@@ -13,6 +13,9 @@ See the License for the specific language governing permissions and limitations 
 	STORAGE_STORAGE_BUCKETNAME
 Amplify Params - DO NOT EDIT */
 
+const aws = require('aws-sdk');
+const s3 = new aws.S3();
+const fastCSV = require('fast-csv');
 var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
@@ -21,6 +24,10 @@ var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware'
 var app = express()
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
+
+const bucket = process.env.STORAGE_STORAGE_BUCKETNAME;
+const params = { Bucket: bucket, Key: "prueba.csv" };
+
 
 // Enable CORS for all methods
 app.use(function(req, res, next) {
@@ -36,7 +43,43 @@ app.use(function(req, res, next) {
 
 app.get('/processFile', function(req, res) {
   // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+  const data_arr = [];
+  
+  console.log(params);
+
+  var file = s3.getObject(params).createReadStream();
+
+  /*s3.getObject(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else res.json({success: 'get call succeed!', dataRead: data});          // successful response
+    
+  });*/
+
+  fastCSV.parseStream(file, {headers: true})
+        .on('data-invalid', (data) => {
+            console.error('Invalid batch row ' + data);
+        })
+        .on('data', (data) => {
+            console.info('Data: ' + JSON.stringify(data));
+            data_arr.push(data);
+        })
+        .on('end', () => {
+            console.info('End of Stream');
+            res.json({success: 'get call succeed!', dataRead: data_arr});
+        })
+        .on('error', (error) => {
+            let msg = "Error in csv stream processing";
+            console.error(msg, ":", error);
+            res.json({errorMessage: 'get call failed!', result: error});
+        });
+  
+
+  /*file.pipe(fastCSV.parse({ headers: false }))
+    .on('error', error => console.error(error))
+    .on('data', row => console.log(row))
+    .on('end', (rowCount) => console.log(`Parsed ${rowCount} rows`));*/
+
+  
 });
 
 app.get('/processFile/*', function(req, res) {

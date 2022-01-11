@@ -20,6 +20,10 @@
         "SimpleAppHelloWorldService": {
           "deploymentBucketName": "amplify-simpleloginreactapp-dev-194017-deployment",
           "s3Key": "amplify-builds/SimpleAppHelloWorldService-576d6e474a466e4f4134-build.zip"
+        },
+        "processFileService": {
+          "deploymentBucketName": "amplify-simpleloginreactapp-dev-194017-deployment",
+          "s3Key": "amplify-builds/processFileService-70395655666c55323971-build.zip"
         }
       }
     }
